@@ -1,0 +1,12 @@
+======gender classification ======
+Best parameters : {'colsample_bytree': 1.0, 'gamma': 1, 'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 600, 'subsample': 0.8}
+Best validation AUC score : 0.860012498748695
+======hold classification ======
+Best parameters : {'colsample_bytree': 0.7, 'gamma': 0, 'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 200, 'subsample': 1.0}
+Best validation AUC score : 0.999750867688034
+======years classification with multiary XGBoost ======
+Best parameters : {'colsample_bytree': 0.7, 'gamma': 0, 'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 600, 'subsample': 0.8}
+Best validation AUC score : 0.7574750950085359
+======levels classification with multiary XGBoost ======
+Best parameters : {'colsample_bytree': 1.0, 'gamma': 0, 'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 600, 'subsample': 0.8}
+Best validation AUC score : 0.9057916505866217

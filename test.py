@@ -64,7 +64,7 @@ def data_generate():
 
 def main():
     # 若尚未產生特徵，請先執行 data_generate() 生成特徵 CSV 檔案
-    #data_generate()
+    # data_generate()
 
     submission = pd.read_csv("sample_submission.csv")
     # 讀取訓練資訊，根據 player_id 將資料分成 80% 訓練、20% 測試
@@ -94,7 +94,8 @@ def main():
 
     for target, config in target_info.items():
         pred_matrix = []
-        model = load(f'./models/rf_{target}_model.joblib')
+        print(f"Predicting {target}...")
+        model = load(f'./models/xgb_{target}_model.joblib')
 
         task_type = config['task_type']
         columns = config['columns']
@@ -114,6 +115,7 @@ def main():
                 probs = model.predict_proba(X_scaled)
                 avg_prob = np.mean([p[1] for p in probs])  # positive class (e.g., male or right-hand)
                 avg_prob = 1 - avg_prob # reverse prob
+                # print(f"probal = {avg_prob}")
                 pred_matrix.append([avg_prob])
 
             else:
@@ -135,16 +137,14 @@ def main():
                     else:
                         # 如果總和為 0（極端錯誤），分配均勻機率
                         aligned_probs = [1.0 / len(aligned_probs)] * len(aligned_probs)
-
+                # print(f"probal = {avg_prob}")
                 pred_matrix.append(aligned_probs)
-
-
 
         assert len(submission) == len(pred_matrix)
         for i, col in enumerate(columns):
             submission[col] = [row[i] for row in pred_matrix]
-
-    submission.to_csv("submission.csv", index=False)
+    print("Writing csv file...")
+    submission.to_csv("submission.csv",float_format="%.6f", index=False)
     print("✅ 預測完成，已儲存為 submission.csv")
 
 
